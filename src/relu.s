@@ -28,7 +28,21 @@ relu:
     li t1, 0             
 
 loop_start:
-    # TODO: Add your own implementation
+    beqz a1, return       
+    lw t3, 0(a0)         
+    blt t3, t1, set_zero 
+    j next_element      
+
+set_zero:
+    sw t1, 0(a0) 
+
+next_element:
+    addi a0, a0, 4       
+    addi a1, a1, -1      
+    j loop_start         
+
+return:
+    jr  ra
 
 error:
     li a0, 36          

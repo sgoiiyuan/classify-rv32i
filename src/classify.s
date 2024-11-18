@@ -167,6 +167,36 @@ classify:
     lw t0, 0(s3)
     lw t1, 0(s8)
     # mul a0, t0, t1 # FIXME: Replace 'mul' with your own implementation
+
+    multiplier_1:
+    # Initialize result to 0
+    li t5, 0            # t5 will hold the result (product)
+
+        # Loop through each bit of b
+    mul_loop_start_1:
+        # Check if b is zero, if so, we're done
+        beqz t1, mul_loop_end_1    # If b == 0, exit the loop
+
+        # If the least significant bit of b is 1, add a to the result
+        andi t6, t1, 1       # t6 = b & 1 (check the least significant bit of b)
+        beqz t6, mul_skip_addition_1    # If the bit is 0, skip addition
+
+        add t5, t5, t0       # result += a (add a to the result)
+
+    mul_skip_addition_1:
+        # Shift a left by 1 (multiply a by 2)
+        slli t0, t0, 1       # a = a * 2 (left shift by 1)
+
+        # Shift b right by 1 (divide b by 2)
+        srli t1, t1, 1       # b = b / 2 (right shift by 1, arithmetic shift)
+
+        # Repeat the loop
+        j mul_loop_start_1
+
+    mul_loop_end_1:
+        # Return the result in a0
+        mv a0, t5            # Copy result to t4 for return
+
     slli a0, a0, 2
     jal malloc 
     beq a0, x0, error_malloc
@@ -206,6 +236,35 @@ classify:
     # mul a1, t0, t1 # length of h array and set it as second argument
     # FIXME: Replace 'mul' with your own implementation
     
+    multiplier_2:
+    # Initialize result to 0
+    li t5, 0            # t5 will hold the result (product)
+
+        # Loop through each bit of b
+    mul_loop_start_2:
+        # Check if b is zero, if so, we're done
+        beqz t1, mul_loop_end_2    # If b == 0, exit the loop
+
+        # If the least significant bit of b is 1, add a to the result
+        andi t6, t1, 1       # t6 = b & 1 (check the least significant bit of b)
+        beqz t6, mul_skip_addition_2    # If the bit is 0, skip addition
+
+        add t5, t5, t0       # result += a (add a to the result)
+
+    mul_skip_addition_2:
+        # Shift a left by 1 (multiply a by 2)
+        slli t0, t0, 1       # a = a * 2 (left shift by 1)
+
+        # Shift b right by 1 (divide b by 2)
+        srli t1, t1, 1       # b = b / 2 (right shift by 1, arithmetic shift)
+
+        # Repeat the loop
+        j mul_loop_start_2
+
+    mul_loop_end_2:
+        # Return the result in a0
+        mv a1, t5            # Copy result to t4 for return
+
     jal relu
     
     lw a0, 0(sp)
@@ -227,6 +286,36 @@ classify:
     lw t0, 0(s3)
     lw t1, 0(s6)
     # mul a0, t0, t1 # FIXME: Replace 'mul' with your own implementation
+
+    multiplier_3:
+    # Initialize result to 0
+    li t5, 0            # t5 will hold the result (product)
+
+        # Loop through each bit of b
+    mul_loop_start_3:
+        # Check if b is zero, if so, we're done
+        beqz t1, mul_loop_end_3    # If b == 0, exit the loop
+
+        # If the least significant bit of b is 1, add a to the result
+        andi t6, t1, 1       # t6 = b & 1 (check the least significant bit of b)
+        beqz t6, mul_skip_addition_3    # If the bit is 0, skip addition
+
+        add t5, t5, t0       # result += a (add a to the result)
+
+    mul_skip_addition_3:
+        # Shift a left by 1 (multiply a by 2)
+        slli t0, t0, 1       # a = a * 2 (left shift by 1)
+
+        # Shift b right by 1 (divide b by 2)
+        srli t1, t1, 1       # b = b / 2 (right shift by 1, arithmetic shift)
+
+        # Repeat the loop
+        j mul_loop_start_3
+
+    mul_loop_end_3:
+        # Return the result in a0
+        mv a0, t5            # Copy result to t4 for return
+
     slli a0, a0, 2
     jal malloc 
     beq a0, x0, error_malloc
@@ -289,6 +378,35 @@ classify:
     mul a1, t0, t1 # load length of array into second arg
     # FIXME: Replace 'mul' with your own implementation
     
+    multiplier_4:
+    # Initialize result to 0
+    li t5, 0            # t5 will hold the result (product)
+
+        # Loop through each bit of b
+    mul_loop_start_4:
+        # Check if b is zero, if so, we're done
+        beqz t1, mul_loop_end_4    # If b == 0, exit the loop
+
+        # If the least significant bit of b is 1, add a to the result
+        andi t6, t1, 1       # t6 = b & 1 (check the least significant bit of b)
+        beqz t6, mul_skip_addition_4    # If the bit is 0, skip addition
+
+        add t5, t5, t0       # result += a (add a to the result)
+
+    mul_skip_addition_4:
+        # Shift a left by 1 (multiply a by 2)
+        slli t0, t0, 1       # a = a * 2 (left shift by 1)
+
+        # Shift b right by 1 (divide b by 2)
+        srli t1, t1, 1       # b = b / 2 (right shift by 1, arithmetic shift)
+
+        # Repeat the loop
+        j mul_loop_start_4
+
+    mul_loop_end_4:
+        # Return the result in a0
+        mv a1, t5            # Copy result to t4 for return
+
     jal argmax
     
     mv t0, a0 # move return value of argmax into t0

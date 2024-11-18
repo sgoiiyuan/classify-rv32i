@@ -29,8 +29,26 @@ argmax:
 
     li t1, 0
     li t2, 1
+    
 loop_start:
-    # TODO: Add your own implementation
+    addi a0, a0, 4        # Move the pointer to the next element in the array
+    bge t2, a1, done      # If the index t2 reaches the array length, exit the loop
+    lw t3, 0(a0)          # Load the current element of the array into t3
+
+    bge t3, t0, update_max # If current element t3 is >= max value (t0), update max value
+
+next_element:
+    addi t2, t2, 1        # Increment the index
+    j loop_start          # Continue to the next element
+
+update_max:
+    addi t0, t3, 0        # Update max value to current element (t3)
+    addi t1, t2, 0        # Update the index of the max value
+    j next_element        # Continue to the next element
+
+done:
+    addi a0, t1, 0        # Return the index of the first maximum element
+    jr ra                 # Return from function
 
 handle_error:
     li a0, 36
