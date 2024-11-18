@@ -1,7 +1,5 @@
 # Assignment 2: Classify
 
-# Assignment2: Complete Applications
-
 ## Project Overview
 This project challenges us to develop a simple yet highly practical system using **RISC-V assembly language**. Throughout the process, we will explore essential low-level programming concepts, such as:
 
